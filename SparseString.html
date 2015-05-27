@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function Test() {}
+        Test.assert = function (inp, act, exp) {
+            if (exp !== act) {
+                console.log('Did not pass test for input: ' +inp+' - Expected ' + exp + ' got ' + act);
+            }
+            else{
+                console.log('Passed test for input: '+ inp + ' Exp: ' + exp+ ' got: '+act);
+            }
+        };
+
+        function SparseString(){
+            this.strArr = [];
+
+
+        }
+        SparseString.prototype.setChar=function(ind, char){
+            if(ind > this.strArr.length ){
+                for (var i =this.strArr.length; i <=ind; i++){
+                    if(i===ind){
+                        this.strArr.push(char);
+
+                    }else{
+                        this.strArr.push('');
+                    }
+                }
+
+            }else{
+                    this.strArr[ind]= char;
+            }
+        };
+        SparseString.prototype.toString=function(){
+            var str=''
+            this.strArr.forEach(function(c){
+                if(c.length ===1 && c!==' '){
+                    str+=c;
+
+                }
+            });
+            return str;
+
+
+        };
+        SparseString.prototype.getChar=function(ind){
+            if(ind <this.strArr.length){
+                return this.strArr[ind];
+
+            }else{
+                return '';
+            }
+        }
+        SparseString.prototype.indexOf=function(char){
+            var index = -1;
+            this.strArr.forEach(function(x, i){
+                if (x ===char && index===-1){
+                    console.log('i',index, i);
+                    index=i;
+                }
+            });
+
+            return index;
+        }
+
+        var s = new SparseString();
+
+       console.log('setchar',s.setChar(3, 'a')); // set the character 'a' at index 3
+        console.log('s: ',s);
+        console.log('getchar',s.getChar(3) );// get the character at the index 5
+        console.log('getchar',s.getChar(5) );// get the character at the index 5
+        console.log('s2',s.toString());
+
+        console.log('indexof',s.indexOf('a')); // first index of character 'a'
+        console.log('s3',s.toString());
+        s.setChar(5, 'd'); // set the character 'a' at index 3
+        s.setChar(8, 'i'); // set the character 'a' at index 3
+        console.log('s: ',s);
+
+        console.log(s.toString()); // should print the string without empty
+
+        </script>
+</head>
+<body>
+
+</body>
+</html>
