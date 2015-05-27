@@ -1,0 +1,18 @@
+{
+  "name": "SingleDiff",
+  "version": "0.0.0",
+  "authors": [
+    "adityamangipudi <aditya.mangipudi@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine": "~2.3.4"
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SingleDiff</title>
+    <script src="bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
+    <script>
+        function Test() {}
+        Test.assert = function (inp, act, exp) {
+            if (exp !== act) {
+                console.log('Did not pass test for input: ' +inp+' - Expected ' + exp + ' got ' + act);
+            }
+            else{
+                console.log('Passed test for input: '+ inp + ' Exp: ' + exp+ ' got: '+act);
+            }
+        };
+        function singleDiff(str1, str2){
+            if(Math.abs(str1.length-str2.length)>1 || str1===str2){
+                return false;
+            }
+            if(str1.length===str2.length ){
+                var st1 = str1.split('');
+                var st2 = str2.split('');
+                var count = 0;
+                st1.forEach(function(c, i){
+                    if(c!==st2[i]){
+                        count++;
+                    }
+
+                });
+                if(count >1||count===0){
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            if(Math.abs(str1.length-str2.length)===1){
+                var st1 = str1.split('');
+                var st2 = str2.split('');
+                var count=0;
+                if(st1.length<st2.length){
+                    st1.forEach(function(s, i){
+                        if(s !== st2[i]&&s !==st2[i+1]){
+                            count++;
+                        }
+                    });
+                    if(count ===0){
+                        return true;
+                    }else{
+
+                        return false;
+                    }
+
+                }else{
+                    st2.forEach(function(s, i){
+                        if(s !== st1[i]&&s !==st1[i+1]){
+                            count++;
+                        }
+                    });
+                    if(count ===0){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+
+
+            }
+
+                //return true;
+        }
+        Test.assert('toy, rot', singleDiff('toy', 'rot'), false);
+        Test.assert('abc, dab', singleDiff('toy', 'dab'), false);
+        Test.assert('toy, dog', singleDiff('toy', 'dog'), false);
+        Test.assert('toy, toys', singleDiff('toy', 'toys'), true);
+        Test.assert('toy, soy', singleDiff('toy', 'soy'), true);
+        Test.assert('cat, cart', singleDiff('toy', 'dog'), false);
+        Test.assert('met, me', singleDiff('met', 'me'), true);
+        Test.assert('time, emit', singleDiff('time', 'emit'), false);
+        Test.assert('short, longlonglong', singleDiff('short', 'longlonglong'), false);
+        Test.assert('longlonglong, short', singleDiff('longlonglong', 'short'), false);
+        Test.assert('abcd, xbcde', singleDiff('abcd', 'xbcde'), false);
+        Test.assert('abcd, axbcd', singleDiff('abcd', 'axbcd'), true);
+        Test.assert('a, b', singleDiff('a', 'b'), true);
+        Test.assert('abc, abc', singleDiff('abc', 'abc'), false);
+        Test.assert('tom, tim', singleDiff('tom', 'tim'), true);
+        Test.assert('cat, car', singleDiff('cat', 'car'), true);
+        Test.assert('abcd, axbxcd', singleDiff('abcd', 'axbxcd'), false);
+        Test.assert('casts, cats', singleDiff('casts', 'cats'), true);
+        Test.assert('adog, dog', singleDiff('adog', 'dog'), true);
+        Test.assert('cast, cat', singleDiff('cast', 'cat'), true);
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
