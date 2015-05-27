@@ -15,36 +15,44 @@
             }
         };
         function singleDiff(str1, str2){
+
+            //case if the strings differ by more than 1 character
             if(Math.abs(str1.length-str2.length)>1 || str1===str2){
                 return false;
             }
+            //case that strings are equal
             if(str1.length===str2.length ){
                 var st1 = str1.split('');
                 var st2 = str2.split('');
                 var count = 0;
+                //foreach check how many are diff
                 st1.forEach(function(c, i){
                     if(c!==st2[i]){
                         count++;
                     }
 
                 });
-                if(count >1||count===0){
+                //if dif is not equal to 1 return false
+                if(count!==1){
                     return false;
                 }
                 else {
                     return true;
                 }
             }
+            //case for diff in string length is 1
             if(Math.abs(str1.length-str2.length)===1){
                 var st1 = str1.split('');
                 var st2 = str2.split('');
                 var count=0;
+                //check which string is shorter and then compare chars to see if diff is greater than 1
                 if(st1.length<st2.length){
                     st1.forEach(function(s, i){
                         if(s !== st2[i]&&s !==st2[i+1]){
                             count++;
                         }
                     });
+                    //if count is 0 it means only 1 character differs
                     if(count ===0){
                         return true;
                     }else{
@@ -58,6 +66,7 @@
                             count++;
                         }
                     });
+                    //if count is 0 it means only 1 character differs
                     if(count ===0){
                         return true;
                     }else{
@@ -90,6 +99,7 @@
         Test.assert('casts, cats', singleDiff('casts', 'cats'), true);
         Test.assert('adog, dog', singleDiff('adog', 'dog'), true);
         Test.assert('cast, cat', singleDiff('cast', 'cat'), true);
+        Test.assert('stat, adtat', singleDiff('stat', 'adtat'), false);
 
 
 
